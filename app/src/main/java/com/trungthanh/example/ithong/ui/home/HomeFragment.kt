@@ -1,14 +1,10 @@
-package com.kietngo.example.laws.traffic.ui.home
+package com.trungthanh.example.ithong.ui.home
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import androidx.core.view.get
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -16,22 +12,12 @@ import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.bottomnavigation.BottomNavigationItemView
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.kietngo.example.laws.traffic.R
-import com.kietngo.example.laws.traffic.base.BaseFragment
-import com.kietngo.example.laws.traffic.databinding.FragmentHomeBinding
-import com.kietngo.example.laws.traffic.repository.EventObserver
-import com.kietngo.example.laws.traffic.ui.model.ButtonUI
-import com.kietngo.example.laws.traffic.ui.model.ViolationUI
-import com.kietngo.example.laws.traffic.ui.share.ShareViewModel
-import com.trungthanh.example.ithong.ui.home.HomeViewModel
-import timber.log.Timber
-import java.util.*
+import com.trungthanh.example.ithong.R
+
 
 class HomeFragment : Fragment() {
 
-    private lateinit var binding : FragmentHomeBinding
+    private lateinit var binding : HomeFragmentBinding
     private lateinit var violationGroupAdapter: ViolationGroupAdapter
     private val viewModel : HomeViewModel by viewModels(){
         object : ViewModelProvider.Factory{
@@ -40,11 +26,10 @@ class HomeFragment : Fragment() {
             }
         }
     }
-    val shareViewModel : ShareViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        violationGroupAdapter = ViolationGroupAdapter(requireContext(),viewModel.listViolationUI,shareViewModel.shareViolationGroupId)
+        violationGroupAdapter = ViolationGroupAdapter(requireContext(),viewModel.listViolationUI)
     }
 
     override fun onCreateView(

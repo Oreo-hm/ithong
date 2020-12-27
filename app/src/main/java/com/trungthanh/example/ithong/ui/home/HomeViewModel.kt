@@ -1,21 +1,8 @@
-package com.kietngo.example.laws.traffic.ui.home
+package com.trungthanh.example.ithong.ui.home
 
 import android.app.Application
-import android.widget.Button
 import androidx.lifecycle.*
 import androidx.navigation.NavDirections
-import com.kietngo.example.laws.traffic.repository.Event
-import com.kietngo.example.laws.traffic.repository.repository.TransportRepository
-import com.kietngo.example.laws.traffic.repository.repository.ViolationGroupRepository
-import com.kietngo.example.laws.traffic.repository.repository.ViolationRepository
-import com.kietngo.example.laws.traffic.repository.room.model.AppDatabase
-import com.kietngo.example.laws.traffic.repository.room.model.transport.type.TransportType
-import com.kietngo.example.laws.traffic.repository.room.model.violation.Violation
-import com.kietngo.example.laws.traffic.repository.room.model.violationgroup.ViolationGroup
-import com.kietngo.example.laws.traffic.ui.model.ButtonUI
-import com.kietngo.example.laws.traffic.ui.model.TransportUI
-import com.kietngo.example.laws.traffic.ui.model.ViolationGroupUI
-import com.kietngo.example.laws.traffic.ui.model.ViolationUI
 import com.trungthanh.example.ithong.repository.*
 import com.trungthanh.example.ithong.ui.models.ButtonUI
 import com.trungthanh.example.ithong.ui.models.ViolationGroupUI
@@ -40,7 +27,7 @@ class HomeViewModel constructor(
     private val _navigateIndex = MutableLiveData<Event<NavDirections>>()
     val navigateIndex : LiveData<Event<NavDirections>> = _navigateIndex
 
-
+    //go to search fragment
     private val _navigateSearch = MutableLiveData<Event<NavDirections>>()
     val navigateSearch : LiveData<Event<NavDirections>> = _navigateSearch
 
@@ -60,6 +47,7 @@ class HomeViewModel constructor(
 
         violationGroupRepository = ViolationGroupRepository(violationGroupDao)
         violationRepository = ViolationRepository(violationDao)
+        transportRepository = TransportRepository(transportDao)
 
         listViolationGroup = violationGroupRepository.getAllViolationGroupUI()
         listViolationGroupUI = Transformations.map(listViolationGroup){
@@ -80,12 +68,25 @@ class HomeViewModel constructor(
                     onClick = {
                         val id = violation.id
                         if(id != null){
-                            val action = HomeFragmentDirections.actionHomeFragmentToDetailFragment(id)
+                            val action = HomeFragmentDirections.actionHomeFragmentToIndexFragment(id)
                             _navigateIndex.postValue(Event(action))
                         }
                     }
                 )
             }
         }
+
+        listTransport = transportRepository.getAllTransport()
+        listTransportUI  = Transformations.map(listTransport) {
+            it.map { transportType ->
+                TransportUI(
+                    transportType = transportType,
+                    onClick = {
+                        //  _navigateViolation.postValue(Event(true))
+                    }
+                )
+            }
+        }
+
     }
 }
