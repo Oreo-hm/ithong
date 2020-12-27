@@ -6,9 +6,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.kietngo.example.laws.traffic.databinding.ItemViolationBinding
-import com.kietngo.example.laws.traffic.databinding.ItemViolationGroupBinding
-import com.kietngo.example.laws.traffic.ui.model.ViolationUI
 import com.trungthanh.example.ithong.ui.models.ViolationUI
 
 class ViolationAdapter : ListAdapter<ViolationUI,ViolationAdapter.ViolationViewHolder>(ViolationAdapter.ViolationDiffUtil) {
@@ -25,9 +22,7 @@ class ViolationAdapter : ListAdapter<ViolationUI,ViolationAdapter.ViolationViewH
                 violationUI.onClick()
             }
         }
-
     }
-
     object ViolationDiffUtil: DiffUtil.ItemCallback<ViolationUI>(){
         override fun areContentsTheSame(oldItem: ViolationUI, newItem: ViolationUI): Boolean {
             return oldItem.violation == newItem.violation
