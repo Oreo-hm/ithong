@@ -74,24 +74,24 @@ class HomeFragment : Fragment() {
         viewModel.navigateIndex.observe(viewLifecycleOwner, EventObserver{
             findNavController().navigate(it)
         })
-
-        viewModel.btnSearch.observe(viewLifecycleOwner, {btn ->
-            binding.bottomNav.setOnNavigationItemSelectedListener { item ->
-                when (item.itemId){
-                    R.id.btnSearch -> {
-                        btn.onClick()
-                        true
-                    }
-                    else -> {
-                        false
-                    }
-                }
-
-            }
-        })
-
-        viewModel.navigateSearch.observe(viewLifecycleOwner,EventObserver{
-            findNavController().navigate(it)
-        })
+//
+//        viewModel.btnSearch.observe(viewLifecycleOwner, {btn ->
+//            binding.bottomNav.setOnNavigationItemSelectedListener { item ->
+//                when (item.itemId){
+//                    R.id.btnSearch -> {
+//                        btn.onClick()
+//                        true
+//                    }
+//                    else -> {
+//                        false
+//                    }
+//                }
+//
+//            }
+//        })
+//
+//        viewModel.navigateSearch.observe(viewLifecycleOwner,EventObserver{
+//            findNavController().navigate(it)
+//        })
     }
 }

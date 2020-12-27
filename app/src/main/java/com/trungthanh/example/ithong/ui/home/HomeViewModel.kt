@@ -24,10 +24,9 @@ class HomeViewModel constructor(
     private val _navigateViolation = MutableLiveData<Event<Boolean>>()
     val navigateViolation : LiveData<Event<Boolean>> = _navigateViolation
 
-    private val _navigateIndex = MutableLiveData<Event<NavDirections>>()
-    val navigateIndex : LiveData<Event<NavDirections>> = _navigateIndex
+    private val _navigateDetail = MutableLiveData<Event<NavDirections>>()
+    val navigateIndex : LiveData<Event<NavDirections>> = _navigateDetail
 
-    //go to search fragment
     private val _navigateSearch = MutableLiveData<Event<NavDirections>>()
     val navigateSearch : LiveData<Event<NavDirections>> = _navigateSearch
 
@@ -47,7 +46,6 @@ class HomeViewModel constructor(
 
         violationGroupRepository = ViolationGroupRepository(violationGroupDao)
         violationRepository = ViolationRepository(violationDao)
-        transportRepository = TransportRepository(transportDao)
 
         listViolationGroup = violationGroupRepository.getAllViolationGroupUI()
         listViolationGroupUI = Transformations.map(listViolationGroup){
@@ -76,17 +74,6 @@ class HomeViewModel constructor(
             }
         }
 
-        listTransport = transportRepository.getAllTransport()
-        listTransportUI  = Transformations.map(listTransport) {
-            it.map { transportType ->
-                TransportUI(
-                    transportType = transportType,
-                    onClick = {
-                        //  _navigateViolation.postValue(Event(true))
-                    }
-                )
-            }
-        }
 
     }
 }
